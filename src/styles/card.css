@@ -16,64 +16,59 @@
 }
 
 /* CONTAINER */
-.container{
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #131516;
+    background: linear-gradient(to right,#9c9b9d, #33264b); /* #2FEBD4, #DEFFFD*/;
     font-family: 'Lato', sans-serif;
     padding: 0 25px;
+    perspective: 1200px;
 }
 
-/* CARD */
-.card-container{
-    display: flex;
-    width: 650px;
-    height: auto;
-    background: linear-gradient(to right,#0e1294, #12a89c); /* #2FEBD4, #DEFFFD*/
-    border-radius: 12px;
-    box-shadow: 1px 7px 10px 2px rgba(0, 0, 0, .15);
-}
-
-.descripcion{
+.description{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.image, .descripcion{
+.image, .description{
     padding: 30px;
     text-align: left;
     color: #FFFFFF;
 }
 
-.descripcion h2{
+.description h2{
     line-height: 2;
     font-weight: 500;
     font-size: medium;
 }
 
-.descripcion p{
+.description p{
     font-weight: 300;
     font-size: 17px;
 }
 
-.descripcion h1{
+.description h1{
     font-weight: 400;
 }
 
 /* ICONS */
-.descripcion .icons{
+.description .icons{
     margin-top: 30px;
 }
-.descripcion .icons a{
+.description .icons a{
     display: inline-block;
     margin: 0 30px 0 30px;
     color: #FFFFFF;
     font-size: 30px;
     transition: .3s;
+}
+a {
+    pointer-events: auto
 }
 a:hover{
     transform: translateY(-3px) scale(1.05);
@@ -104,6 +99,7 @@ a:hover{
     font-family: 'Lato', sans-serif;
     font-weight: 200;
     text-align: center;
+    pointer-events: auto;
 }
 
 /* RESPONSIVE */
@@ -127,23 +123,23 @@ a:hover{
     .image{
         padding: 15px 0 0 0;
     }
-    .descripcion{
+    .description{
         padding: 10px 20px 18px 20px;
     }
-    .descripcion h1{
+    .description h1{
         font-weight: 400;
         font-size: 25px;
     }
-    .descripcion h2{
+    .description h2{
         line-height: 2;
         font-weight: 500;
         font-size: 17px;
     }
-    .descripcion p{
+    .description p{
         font-weight: 300;
         font-size: 15px;
     }
-    .descripcion .icons{
+    .description .icons{
         margin-top: 18px;
     }
 }

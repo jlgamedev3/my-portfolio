@@ -1,22 +1,25 @@
 ---
 // src/pages/index.astro
-
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Card from "../components/Card.astro";
+import FlipCard from "../components/FlipCard.astro";
 ---
 
-<BaseLayout title="Jason Laske" description="Meta description. Here goes your page description. Provide a clear and concise summary of the content.">
-	<Card
-	  name="Jason Laske"
-	  position="Software Engineer"
-	  aboutMe={`Hi there!\n
-	  		I'm Jason, a seasoned software engineer passionate about crafting clean and dynamic software.\n
-	  		With 10 years of experience, I specialize in back-end development using Java, Javascript, Python and frameworks like Spring and Azure.\n
-			I thrive on creating user-centric designs and optimizing performance for seamless experiences.\n
-			Let's collaborate together!`}
-	  linkedin="https://www.linkedin.com/in/jason-laske-38aa05b9"
-	  github="https://www.github.com/jlgamedev3"
-	  cvLink="/my-portfolio/files/resume-cv.pdf"
-	  profileImage="/my-portfolio/images/profile2.webp"
+<BaseLayout title="Business Card">
+	<FlipCard 
+		name="Jason Laske"
+	  	position="Software Engineer"
+	  	aboutMe={`Hi, I’m Jason.\n
+I’m a Software Engineer passionate about building clean, scalable, and impactful software.\n
+With 10+ years of experience across full-stack development, backend engineering, and technical leadership, I enjoy turning complex challenges into simple, high-performance solutions.\n
+Let’s build something great.`}
+		backTitle="Let’s Connect!"
+		outro={`Have an idea? Let’s talk.\n
+Whether you’re building something new,\n solving a tough technical challenge,\n or just want to connect — I’d love to hear from you.\n
+Explore. Connect. Collaborate.\n
+<i>Let’s create what’s next!</i>`}
+	  	linkedin="https://www.linkedin.com/in/jason-laske-38aa05b9"
+	  	github="https://www.github.com/jlgamedev3"
+	  	cvLink="/my-portfolio/files/resume-cv.pdf"
+	  	profileImage="/my-portfolio/images/profile2.webp"
 	/>
 </BaseLayout>

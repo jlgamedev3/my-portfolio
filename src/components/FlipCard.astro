@@ -1,0 +1,212 @@
+---
+//src/components/FloatingCard.astro
+const { name, position, aboutMe, backTitle, outro, linkedin, github, cvLink, profileImage } =
+  Astro.props;
+const aboutMeFormatted = aboutMe.replaceAll("\n", "<br/>");
+const outroFormatted = outro.replaceAll("\n", "<br/>");
+
+import "../styles/card.css";
+---
+
+<div class="container">
+  <div id="card-container" class="card-container">
+    <div id="card-flip" class="card-flip">
+      <div class="card-face card-front">
+        <div class="description">
+          <h1>{name}</h1>
+          <h2>{position}</h2>
+          <p set:html={aboutMeFormatted} />
+          <div class="icons">
+            <a href={linkedin} class="hover-text" target="_blank">
+              <span class="tooltip-text" id="fade"> LinkedIn </span>
+              <i class="bi bi-linkedin"></i>
+            </a>
+            <a href={github} class="hover-text" target="_blank">
+              <span class="tooltip-text" id="fade"> GitHub </span>
+              <i class="bi bi-github"></i>
+            </a>
+            <a href={cvLink} class="hover-text" target="_blank">
+              <span class="tooltip-text" id="fade"> Resume </span>
+              <i class="bi bi-file-earmark-arrow-down"></i>
+            </a>
+          </div>
+        </div>
+        <div class="image">
+          <img src={profileImage} alt="" />
+        </div>
+      </div>
+      <div class="card-face card-back">
+        <!-- <div class="image">
+          <img src={profileImage} alt="" />
+        </div> -->
+          <div class="description">
+            <h1>{backTitle}</h1>
+            <br />
+            <p set:html={outroFormatted} />
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .card-front {
+    position: absolute;
+    transform-style: preserve-3d;
+    display: flex;
+    max-width: auto;
+    height: auto;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+    color: #000000;
+  }
+
+  .card-back {
+    transform: rotateY(180deg);
+    position: absolute;
+    transform-style: preserve-3d;
+    display: flex;
+    max-width: auto;
+    height: auto;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+    color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid #334155; */
+  }
+
+  .card-face {
+    position: absolute;
+    transform-style: preserve-3d;
+    display: flex;
+    max-width: auto;
+    min-width: 60vw;
+    height: auto;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    margin: 10px;
+    padding: 10px;
+    backface-visibility: hidden;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+    user-select: none; /* Standard */
+  }
+
+  .card-flip {
+    display: flex;
+    width: 60vw;
+    height: auto;
+    min-width: 60vw;
+    background: linear-gradient(to right, #0e1294, #12a89c);
+    border-radius: 12px;
+    box-shadow: 1px 7px 10px 2px rgba(0, 0, 0, 0.15);
+    position: relative;
+    transform-style: preserve-3d;
+    animation: floatIdle 12s ease-in-out infinite;
+    border: 2px solid #334155;
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+  @keyframes floatIdle {
+    0% {
+      transform: translateY(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+    25% {
+      transform: translateY(-8px) rotateX(2deg) rotateY(-3deg) rotateZ(1deg);
+    }
+    50% {
+      transform: translateY(-15px) rotateX(-2deg) rotateY(4deg) rotateZ(-1deg);
+    }
+    75% {
+      transform: translateY(-7px) rotateX(3deg) rotateY(-2deg) rotateZ(0.5deg);
+    }
+    100% {
+      transform: translateY(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+  }
+
+  /* .card-flip:active */
+  .card-flip:hover {
+    animation-play-state: paused;
+  }
+
+  .card-container {
+    display: flex;
+    width: auto;
+    height: auto;
+    min-height: 65vh;
+    transform-style: preserve-3d;
+    transition:
+      transform 0.6s ease,
+      box-shadow 0.3s ease;
+    font-family: system-ui, sans-serif;
+  }
+</style>
+
+<script>
+  const cardContainer = document.getElementById("card-container");
+  let isDragging = false;
+  let startX = 0, startY = 0;
+  let currentX = 0, currentY = 0;
+
+  cardContainer.addEventListener("pointerdown", (e) => {
+    if (e.target.closest("a")) return;
+    isDragging = true;
+    startX = e.clientX - currentX;
+    startY = e.clientY - currentY;
+    cardContainer.setPointerCapture(e.pointerId);
+    cardContainer.style.cursor = "grabbing";
+  });
+
+  window.addEventListener("pointermove", (e) => {
+    if (!isDragging) return;
+    currentX = e.clientX - startX;
+    currentY = (e.clientY - startY) / 25;
+    cardContainer.style.transform = `rotateX(${currentY}deg) rotateY(${currentX}deg)`;
+  });
+
+  window.addEventListener("pointerup", (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    cardContainer.releasePointerCapture(e.pointerId);
+    cardContainer.style.cursor = "default";
+    cardContainer.style.transition = "transform 1s ease-out";
+    currentX = 0;
+    currentY = 0;
+    let yAngleInDegrees = getRotationAngle();
+    if (yAngleInDegrees >= 90 && yAngleInDegrees <= 270) {
+      cardContainer.style.transform = `rotate3d(0, 1, 0, 180deg)`;
+    } else {
+      cardContainer.style.transform = `rotate3d(0, 0, 0, -180deg)`;
+    }
+  });
+
+  function getRotationAngle() {
+    const style = window.getComputedStyle(cardContainer);
+    const matrix = style.transform || style.webkitTransform || style.mozTransform;
+    let yAngleInDegrees = 0;
+    if (matrix && matrix !== "none") {
+      const values = matrix.split("(")[1].split(")")[0].split(",");
+      const a = values[0];
+      const b = values[2];
+      const angleInRadians = Math.atan2(b, a);
+      let degrees = angleInRadians * (180 / Math.PI);
+      yAngleInDegrees = Math.round(degrees);
+      if (yAngleInDegrees < 0) {
+        yAngleInDegrees += 360;
+      }
+      console.log(`Rotation: ${yAngleInDegrees}deg`);
+    } else {
+      console.log("Rotation: 0deg");
+    }
+    return yAngleInDegrees;
+  }
+</script>
