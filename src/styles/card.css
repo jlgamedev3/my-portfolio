@@ -2,13 +2,13 @@
 /* IMAGE */
 .image{
     display: flex;
+    flex-direction: row; 
     justify-content: center;
-    align-items: center;
 }
 
 .image img{
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-radius: 100%;
     text-align: center;
     object-fit: cover;
@@ -18,13 +18,15 @@
 /* CONTAINER */
 .container {
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
+    width: 100vw;
     background-color: #131516;
-    background: linear-gradient(to right,#9c9b9d, #33264b); /* #2FEBD4, #DEFFFD*/;
+    background: linear-gradient(to right,#9c9b9d, #33264b);
     font-family: 'Lato', sans-serif;
-    padding: 0 25px;
+    padding-top: 5%;
     perspective: 1200px;
 }
 
@@ -36,29 +38,30 @@
 }
 
 .image, .description{
-    padding: 30px;
+    padding: 1%;
     text-align: left;
     color: #FFFFFF;
+}
+
+.description h1{
+    font-weight: 400;
+    font-size: clamp(1rem, 5vw + 1rem, 2rem);
 }
 
 .description h2{
     line-height: 2;
     font-weight: 500;
-    font-size: medium;
+    font-size: clamp(1rem, 3vw + 1rem, 1.5rem);
 }
 
 .description p{
     font-weight: 300;
-    font-size: 17px;
-}
-
-.description h1{
-    font-weight: 400;
+    font-size: clamp(1rem, 1vw + 0.75rem, 1.25rem);
 }
 
 /* ICONS */
 .description .icons{
-    margin-top: 30px;
+    margin-top: 2%;
 }
 .description .icons a{
     display: inline-block;
@@ -103,44 +106,39 @@ a:hover{
 }
 
 /* RESPONSIVE */
-@media (max-width: 576px){
+@media (max-width: 800px){
     .container{
         height: 100vh;
-        padding: 0 15px;
-    }
-    .card-container{
+        width: 100vw;
         display: flex;
-        flex-direction: column-reverse;
-        background: linear-gradient(#12a89c, #024945);
-        width: 750px;
-        margin-top: 12px;
-        margin-bottom: 12px;
+        flex-direction: column;
+        align-items: center;
     }
     .image img{
-        width: 90px;
-        height: 90px;
+        max-width: 100%;
+        height: auto;
     }
     .image{
-        padding: 15px 0 0 0;
+        padding: 2% 0 0 0;
     }
     .description{
         padding: 10px 20px 18px 20px;
     }
     .description h1{
         font-weight: 400;
-        font-size: 25px;
+        font-size: clamp(1rem, 5vw + 1rem, 2rem);
     }
     .description h2{
         line-height: 2;
         font-weight: 500;
-        font-size: 17px;
+        font-size: clamp(1rem, 3vw + 1rem, 1.5rem);
     }
     .description p{
         font-weight: 300;
-        font-size: 15px;
+        font-size: clamp(1rem, 1vw + 0.75rem, 1.25rem);
     }
     .description .icons{
-        margin-top: 18px;
+        margin-top: 2%;
     }
 }
 @media (min-width: 320px){
@@ -148,6 +146,15 @@ a:hover{
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 20px;
+        margin-top: 1%;
+    }
+}
+@media (max-height: 500px){
+    .container{
+        height: 150vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
     }
 }
