@@ -36,9 +36,6 @@ import "../styles/card.css";
         </div>
       </div>
       <div class="card-face card-back">
-        <!-- <div class="image">
-          <img src={profileImage} alt="" />
-        </div> -->
           <div class="description">
             <h1>{backTitle}</h1>
             <br />
@@ -77,21 +74,21 @@ import "../styles/card.css";
     color: #ffffff;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid #334155; */
   }
 
   .card-face {
     position: absolute;
     transform-style: preserve-3d;
     display: flex;
+    flex-direction: row;
     max-width: auto;
     min-width: 60vw;
-    height: auto;
     box-sizing: border-box;
     overflow-wrap: break-word;
     overflow: hidden;
-    margin: 10px;
-    padding: 10px;
+    margin: 1%;
+    padding: 1%;
+    padding-right: 30px;
     backface-visibility: hidden;
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
@@ -101,6 +98,8 @@ import "../styles/card.css";
 
   .card-flip {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     width: 60vw;
     height: auto;
     min-width: 60vw;
@@ -133,21 +132,62 @@ import "../styles/card.css";
     }
   }
 
-  /* .card-flip:active */
+  .card-flip:active
   .card-flip:hover {
     animation-play-state: paused;
   }
 
   .card-container {
     display: flex;
+    flex-direction: row;
     width: auto;
     height: auto;
-    min-height: 65vh;
+    min-height: 85vh;
     transform-style: preserve-3d;
     transition:
       transform 0.6s ease,
       box-shadow 0.3s ease;
     font-family: system-ui, sans-serif;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 800px){
+    .card-face {
+      position: absolute;
+      transform-style: preserve-3d;
+      display: flex;
+      flex-direction: column;
+      max-width: auto;
+      min-width: 60vw;
+      box-sizing: border-box;
+      overflow-wrap: break-word;
+      overflow: hidden;
+      margin: 1%;
+      padding: 1%;
+      backface-visibility: hidden;
+      -webkit-user-select: none; /* Safari */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* IE/Edge */
+      user-select: none; /* Standard */
+    }
+
+    .card-flip {
+      width: 90vw;
+      min-width: 90vw;
+    }
+
+    .card-container {
+      display: flex;
+      width: auto;
+      height: auto;
+      min-height: 65vh;
+      transform-style: preserve-3d;
+      transition:
+        transform 0.6s ease,
+        box-shadow 0.3s ease;
+      font-family: system-ui, sans-serif;
+      margin-top: -20%;
+    }
   }
 </style>
 
@@ -203,10 +243,7 @@ import "../styles/card.css";
       if (yAngleInDegrees < 0) {
         yAngleInDegrees += 360;
       }
-      console.log(`Rotation: ${yAngleInDegrees}deg`);
-    } else {
-      console.log("Rotation: 0deg");
-    }
+    } 
     return yAngleInDegrees;
   }
 </script>
